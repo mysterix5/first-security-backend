@@ -2,6 +2,7 @@ package de.neuefische.kanbanbackend.user;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -20,8 +21,8 @@ public class MyUserController {
 
 
     @GetMapping("/{username}")
-    public Optional<MyUser> findUserByUsername(@PathVariable String username){
-        return myUserService.findByName(username);
+    public ResponseEntity<MyUserDTO> findUserByUsername(@PathVariable String username){
+        return ResponseEntity.of(myUserService.findByName(username));
     }
 
 

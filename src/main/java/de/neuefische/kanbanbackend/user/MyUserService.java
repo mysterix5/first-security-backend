@@ -15,7 +15,11 @@ public class MyUserService {
         myUserRepo.save(newUser);
     }
 
-    public Optional<MyUser> findByName(String username) {
-        return myUserRepo.findByUsername(username);
+    public Optional<MyUserDTO> findByName(String username) {
+        Optional<MyUser> optUser = myUserRepo.findByUsername(username);
+        if (optUser.isPresent()){
+            return Optional.of(new MyUserDTO(optUser.get().getUsername()));
+        }
+        return Optional.empty();
     }
 }
