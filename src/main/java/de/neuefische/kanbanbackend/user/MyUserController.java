@@ -2,6 +2,7 @@ package de.neuefische.kanbanbackend.user;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
