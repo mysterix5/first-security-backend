@@ -1,6 +1,7 @@
 package de.neuefische.kanbanbackend.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -10,16 +11,13 @@ import java.util.Optional;
 public class MyUserService {
 
     private final MyUserRepo myUserRepo;
+    private final PasswordEncoder encoder;
 
     public void createNewUser(MyUser newUser) {
+        String encodedPassword = encoder.encode(newUser.getPassword());
+        newUser.setPassword(encodedPassword);
         myUserRepo.save(newUser);
     }
 
-    public Optional<MyUserDTO> findByName(String username) {
-        Optional<MyUser> optUser = myUserRepo.findByUsername(username);
-        if (optUser.isPresent()){
-            return Optional.of(new MyUserDTO(optUser.get().getUsername()));
-        }
-        return Optional.empty();
-    }
+
 }

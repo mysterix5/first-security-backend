@@ -20,10 +20,7 @@ public class MyUserController {
     }
 
 
-    @GetMapping("/{username}")
-    public ResponseEntity<MyUserDTO> findUserByUsername(@PathVariable String username){
-        return ResponseEntity.of(myUserService.findByName(username));
-    }
+
 
 
 }
