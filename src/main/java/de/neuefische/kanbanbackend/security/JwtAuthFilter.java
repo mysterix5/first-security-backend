@@ -3,6 +3,7 @@ package de.neuefische.kanbanbackend.security;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -45,7 +46,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     }
 
     private void setSecurityContext(Claims claims) {
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(claims.getSubject(), "", List.of());
+        List<SimpleGrantedAuthority> grantedAuthorities = ((List<String>) claims.get("roles")).stream().map(au -> new SimpleGrantedAuthority(au)).toList();
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(claims.getSubject(), "", grantedAuthorities);
         SecurityContextHolder.getContext().setAuthentication(token);
     }
 }
