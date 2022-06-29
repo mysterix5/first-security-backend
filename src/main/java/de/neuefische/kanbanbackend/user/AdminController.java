@@ -1,10 +1,7 @@
 package de.neuefische.kanbanbackend.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +20,16 @@ public class AdminController {
                     return userFromDB;
                 })
                 .map(myUserService::saveUser);
+    }
+
+    @DeleteMapping("/{username}")
+    public void deleteUser(@PathVariable String username) {
+        myUserService.deleteByUsername(username);
+    }
+
+    @GetMapping
+    public List<MyUserDTO> getAllUsers(){
+        return myUserService.getAllUsers().stream().map(u->new MyUserDTO(u)).toList();
     }
 
 }
