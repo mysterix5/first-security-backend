@@ -26,11 +26,9 @@ public class MyUserController {
         }
     }
 
-
     @GetMapping
     public String getUsername(Principal principal) {
         return principal.getName();
     }
-
 
 }
