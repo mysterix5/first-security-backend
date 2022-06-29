@@ -21,12 +21,17 @@ public class LoginController {
 
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
+    private final MyUserService myUserService;
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@RequestBody LoginData loginData) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginData.getUsername(), loginData.getPassword()));
-            return ResponseEntity.ok(new LoginResponse(jwtService.createToken(new HashMap<>(), loginData.getUsername())));
+
+            MyUser user = myUserService.findByUsername(loginData.getUsername()).orElseThrow();
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("roles", user.getRoles());
+            return ResponseEntity.ok(new LoginResponse(jwtService.createToken(claims, loginData.getUsername())));
         } catch(Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }

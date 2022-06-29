@@ -17,7 +17,7 @@ public class MyUserController {
     private final MyUserService myUserService;
 
     @PostMapping
-    public void postNewUser(@RequestBody MyUser newUser){
+    public void postNewUser(@RequestBody MyUser newUser) {
         myUserService.createNewUser(newUser);
     }
 
