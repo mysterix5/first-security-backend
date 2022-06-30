@@ -1,5 +1,6 @@
 package de.neuefische.kanbanbackend.user;
 
+import de.neuefische.kanbanbackend.user.oauth.GithubUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,11 @@ public class MyUserService {
 
     public void deleteByUsername(String username) {
         myUserRepo.deleteByUsername(username);
+    }
+
+    public MyUser createOrGetUserFromMongoDB(GithubUser githubUser){
+        return myUserRepo.findByGithubUserId(githubUser.getId()).orElse(myUserRepo.save(
+                new MyUser(githubUser)
+        ));
     }
 }
