@@ -16,8 +16,14 @@ public class MyUserService {
     private final MyUserRepo myUserRepo;
     private final PasswordEncoder encoder;
 
-    public void createNewUser(MyUser newUser) {
-        String encodedPassword = encoder.encode(newUser.getPassword());
+    public void createNewUser(UserCreationData userCreationData) {
+        if (!Objects.equals(userCreationData.getPassword(), userCreationData.getPasswordAgain())) {
+            throw new IllegalArgumentException("password do not match");
+        }
+
+        String encodedPassword = encoder.encode(userCreationData.getPassword());
+        MyUser newUser = new MyUser();
+        newUser.setUsername(userCreationData.getUsername());
         newUser.setPassword(encodedPassword);
         newUser.setRoles(Collections.singletonList("user"));
         myUserRepo.save(newUser);

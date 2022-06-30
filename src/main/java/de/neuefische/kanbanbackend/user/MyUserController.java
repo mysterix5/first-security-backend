@@ -17,15 +17,18 @@ public class MyUserController {
     private final MyUserService myUserService;
 
     @PostMapping
-    public void postNewUser(@RequestBody MyUser newUser) {
-        myUserService.createNewUser(newUser);
+    public ResponseEntity<Void> postNewUser(@RequestBody UserCreationData userCreationData) {
+        try {
+            myUserService.createNewUser(userCreationData);
+            return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
-
 
     @GetMapping
     public String getUsername(Principal principal) {
         return principal.getName();
     }
-
 
 }
