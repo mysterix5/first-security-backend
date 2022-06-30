@@ -1,5 +1,6 @@
 package de.neuefische.kanbanbackend;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,12 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("api/greet")
+@RequestMapping("/api")
 public class GreetingController {
-
-
-
-    @GetMapping
+    @GetMapping("/greet")
     public String sayHello(Principal principal){
         return principal.getName();
     }
