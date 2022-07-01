@@ -2,14 +2,13 @@ package de.neuefische.kanbanbackend;
 
 import de.neuefische.kanbanbackend.user.LoginData;
 import de.neuefische.kanbanbackend.user.LoginResponse;
-import de.neuefische.kanbanbackend.user.MyUser;
+import de.neuefische.kanbanbackend.user.UserCreationData;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
-import org.springframework.util.MultiValueMap;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class KanbanBackendApplicationTests {
@@ -20,9 +19,10 @@ class KanbanBackendApplicationTests {
     @Test
     void secureIntegrationTest() {
         // create new user
-        var newUser = new MyUser();
+        var newUser = new UserCreationData();
         newUser.setUsername("klausi");
         newUser.setPassword("manta");
+        newUser.setPasswordAgain("manta");
         ResponseEntity<Void> createUserResponse = restTemplate.postForEntity("/api/user", newUser, Void.class);
         Assertions.assertThat(createUserResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
 
