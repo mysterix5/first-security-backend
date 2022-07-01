@@ -19,7 +19,13 @@ public class OauthController {
 
     @GetMapping
     public ResponseEntity<LoginResponse> githubOauthFlow(@RequestParam String code) {
-        MyUser user = oauthService.githubOauthFlow(code);
+        MyUser user;
+        try {
+            user = oauthService.githubOauthFlow(code);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("roles", user.getRoles());

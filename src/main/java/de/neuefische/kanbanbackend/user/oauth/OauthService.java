@@ -4,10 +4,7 @@ import de.neuefische.kanbanbackend.user.MyUser;
 import de.neuefische.kanbanbackend.user.MyUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,20 +13,16 @@ import org.springframework.web.client.RestTemplate;
 public class OauthService {
     private final RestTemplate template;
     private final MyUserService myUserService;
-    @Value("${GITHUB_CLIENT_ID}")
+    @Value("${oauth.github.id}")
     private String githubClientId;
-    @Value("${GITHUB_CLIENT_SECRET}")
+    @Value("${oauth.github.secret}")
     private String githubClientSecret;
+
 
     public MyUser githubOauthFlow(String code) {
         String githubAuthorizationToken = getAuthorizationTokenFromGithub(code).getToken();
-        System.out.println("github authorization token: " + githubAuthorizationToken);
 
         GithubUser githubUser = getUserFromGithubAccessToken(githubAuthorizationToken);
-
-        System.out.println(githubUser);
-
-//        MyUser user = myUserService.createOrGet(gitHubUser.getBody());
 
         return myUserService.createOrGetUserFromMongoDB(githubUser);
 
@@ -40,8 +33,10 @@ public class OauthService {
                 + "client_id=" + githubClientId
                 + "&client_secret=" + githubClientSecret
                 + "&code=" + code;
-        System.out.println(url);
         ResponseEntity<GithubAccessTokenResponse> request = template.postForEntity(url, null, GithubAccessTokenResponse.class);
+        if(!request.getStatusCode().equals(HttpStatus.OK)){
+            throw new RuntimeException("Request for authentication token to Github failed");
+        }
         return request.getBody();
     }
 

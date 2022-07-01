@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -18,7 +19,10 @@ public class MyUserService {
 
     public void createNewUser(UserCreationData userCreationData) {
         if (!Objects.equals(userCreationData.getPassword(), userCreationData.getPasswordAgain())) {
-            throw new IllegalArgumentException("password do not match");
+            throw new IllegalArgumentException("passwords do not match");
+        }
+        if (myUserRepo.existsByUsername(userCreationData.getUsername())){
+            throw new IllegalArgumentException("username already taken");
         }
 
         String encodedPassword = encoder.encode(userCreationData.getPassword());
@@ -46,8 +50,9 @@ public class MyUserService {
         myUserRepo.deleteByUsername(username);
     }
 
-    public MyUser createOrGetUserFromMongoDB(GithubUser githubUser){
-        return myUserRepo.findByGithubUserId(githubUser.getId()).orElse(myUserRepo.save(
+    public MyUser createOrGetUserFromMongoDB(GithubUser githubUser) {
+        Optional<MyUser> userFromDB = myUserRepo.findByGithubUserId(githubUser.getId());
+        return userFromDB.orElseGet(() -> myUserRepo.save(
                 new MyUser(githubUser)
         ));
     }
