@@ -10,6 +10,6 @@ public class ReactRouterFix {
 //    }
     @RequestMapping(value = "/oauth")
     public String forwardToOauth() {
-        return "forward:/oauth";
+        return "forward:/";
     }
 }
