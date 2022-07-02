@@ -12,11 +12,25 @@ public class AdminController {
 
     private final MyUserService myUserService;
 
-    @PutMapping("/{username}")
-    public void giveAdminRights(@PathVariable String username) {
+    @PutMapping("/{username}/{role}")
+    public void addNewRole(@PathVariable String username, @PathVariable String role) {
         myUserService.findByUsername(username)
                 .map(userFromDB -> {
-                    userFromDB.setRoles(List.of("admin"));
+                    List<String> roles = userFromDB.getRoles();
+                    roles.add(role);
+                    userFromDB.setRoles(roles);
+                    return userFromDB;
+                })
+                .map(myUserService::saveUser);
+    }
+
+    @DeleteMapping("/{username}/{role}")
+    public void deleteRole(@PathVariable String username, @PathVariable String role) {
+        myUserService.findByUsername(username)
+                .map(userFromDB -> {
+                    List<String> roles = userFromDB.getRoles();
+                    roles.remove(role);
+                    userFromDB.setRoles(roles);
                     return userFromDB;
                 })
                 .map(myUserService::saveUser);
@@ -29,7 +43,7 @@ public class AdminController {
 
     @GetMapping
     public List<MyUserDTO> getAllUsers(){
-        return myUserService.getAllUsers().stream().map(u->new MyUserDTO(u)).toList();
+        return myUserService.getAllUsers().stream().map(MyUserDTO::new).toList();
     }
 
 }
