@@ -33,7 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/oauth").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user", "/api/login").permitAll()
                 .antMatchers("/api/admin/**").hasRole("admin")
-                .antMatchers("/**").authenticated()
+                .antMatchers("/api/**").authenticated()
+                .antMatchers("/**").permitAll()
                 .and()
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
