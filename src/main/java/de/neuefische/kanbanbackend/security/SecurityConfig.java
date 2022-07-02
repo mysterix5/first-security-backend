@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .cors().configurationSource(corsConfigurationSource())
                 .and().authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/env").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/greet").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/oauth").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user", "/api/login").permitAll()
                 .antMatchers("/api/admin/**").hasRole("admin")

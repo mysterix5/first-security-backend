@@ -11,8 +11,8 @@ import java.security.Principal;
 @RequestMapping("/api")
 public class GreetingController {
     @GetMapping("/greet")
-    public String sayHello(Principal principal){
-        return principal.getName();
+    public String sayHello(){
+        return "Hallo Welt!";
     }
 
 
