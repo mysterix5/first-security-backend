@@ -1,4 +1,4 @@
-package de.neuefische.kanbanbackend.user;
+package de.neuefische.kanbanbackend.model.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

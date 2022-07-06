@@ -1,4 +1,4 @@
-package de.neuefische.kanbanbackend.user.oauth;
+package de.neuefische.kanbanbackend.model.security;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

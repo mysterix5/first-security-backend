@@ -1,5 +1,6 @@
 package de.neuefische.kanbanbackend.user;
 
+import de.neuefische.kanbanbackend.model.user.MyUser;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

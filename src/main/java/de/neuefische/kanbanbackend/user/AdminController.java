@@ -1,5 +1,6 @@
 package de.neuefische.kanbanbackend.user;
 
+import de.neuefische.kanbanbackend.model.user.MyUserDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

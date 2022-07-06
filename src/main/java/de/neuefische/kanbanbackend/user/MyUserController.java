@@ -1,13 +1,12 @@
 package de.neuefische.kanbanbackend.user;
 
 
+import de.neuefische.kanbanbackend.model.user.UserCreationData;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Role;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/user")

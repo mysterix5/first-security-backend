@@ -1,6 +1,8 @@
 package de.neuefische.kanbanbackend.user;
 
-import de.neuefische.kanbanbackend.user.oauth.GithubUser;
+import de.neuefische.kanbanbackend.model.security.GithubUser;
+import de.neuefische.kanbanbackend.model.user.MyUser;
+import de.neuefische.kanbanbackend.model.user.UserCreationData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

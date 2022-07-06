@@ -1,8 +1,7 @@
-package de.neuefische.kanbanbackend.user;
+package de.neuefische.kanbanbackend.model.user;
 
 
-import de.neuefische.kanbanbackend.user.oauth.GithubUser;
-import lombok.AllArgsConstructor;
+import de.neuefische.kanbanbackend.model.security.GithubUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;

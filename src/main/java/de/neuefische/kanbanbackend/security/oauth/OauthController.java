@@ -1,8 +1,8 @@
-package de.neuefische.kanbanbackend.user.oauth;
+package de.neuefische.kanbanbackend.security.oauth;
 
 import de.neuefische.kanbanbackend.security.JWTService;
-import de.neuefische.kanbanbackend.user.LoginResponse;
-import de.neuefische.kanbanbackend.user.MyUser;
+import de.neuefische.kanbanbackend.model.security.LoginResponse;
+import de.neuefische.kanbanbackend.model.user.MyUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,9 @@
-package de.neuefische.kanbanbackend.user;
+package de.neuefische.kanbanbackend.security;
 
-import de.neuefische.kanbanbackend.security.JWTService;
+import de.neuefische.kanbanbackend.model.security.LoginData;
+import de.neuefische.kanbanbackend.model.security.LoginResponse;
+import de.neuefische.kanbanbackend.model.user.MyUser;
+import de.neuefische.kanbanbackend.user.MyUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

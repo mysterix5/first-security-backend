@@ -1,8 +1,8 @@
 package de.neuefische.kanbanbackend;
 
-import de.neuefische.kanbanbackend.user.LoginData;
-import de.neuefische.kanbanbackend.user.LoginResponse;
-import de.neuefische.kanbanbackend.user.UserCreationData;
+import de.neuefische.kanbanbackend.model.security.LoginData;
+import de.neuefische.kanbanbackend.model.security.LoginResponse;
+import de.neuefische.kanbanbackend.model.user.UserCreationData;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

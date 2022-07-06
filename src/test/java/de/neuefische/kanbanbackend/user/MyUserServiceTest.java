@@ -1,5 +1,7 @@
 package de.neuefische.kanbanbackend.user;
 
+import de.neuefische.kanbanbackend.model.user.MyUser;
+import de.neuefische.kanbanbackend.model.user.UserCreationData;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,6 +1,8 @@
-package de.neuefische.kanbanbackend.user.oauth;
+package de.neuefische.kanbanbackend.security.oauth;
 
-import de.neuefische.kanbanbackend.user.MyUser;
+import de.neuefische.kanbanbackend.model.security.GithubAccessTokenResponse;
+import de.neuefische.kanbanbackend.model.security.GithubUser;
+import de.neuefische.kanbanbackend.model.user.MyUser;
 import de.neuefische.kanbanbackend.user.MyUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
